@@ -8,9 +8,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
 <link rel="icon" type="image/svg+xml" href="img/logo.svg">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-<link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#2778b9">
-<meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="ບໍລິຫານ ມ.ຄອບ">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@400;600;700&display=swap">
 <style>
@@ -27,6 +25,9 @@ header a:focus-visible{outline:2px solid #f2b33d;outline-offset:2px}
 .frame{position:relative;flex:1}
 iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
 .loading{position:absolute;inset:0;display:grid;place-items:center;color:#566879;font-size:14px;text-align:center;padding:20px}
+.launch{display:none;position:absolute;inset:0;place-items:center;text-align:center;padding:24px;color:#566879;font-size:14px}
+.launch img{width:96px;height:96px;border-radius:22px;display:block;margin:0 auto 14px;box-shadow:0 4px 14px rgba(0,0,0,.15)}
+.launch a.go{display:inline-block;margin:16px 0 10px;background:#2778b9;color:#fff;text-decoration:none;font-size:17px;font-weight:700;padding:14px 28px;border-radius:14px}
 .loading img{width:88px;height:88px;border-radius:20px;display:block;margin:0 auto 12px;box-shadow:0 4px 14px rgba(0,0,0,.15)}
 </style>
 </head>
@@ -38,16 +39,44 @@ iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff
 </header>
 <div class="frame">
   <div class="loading" id="loading"><div><img src="img/logo.svg" alt="">ກຳລັງໂຫຼດ…<br><small>ຖ້າໜ້າບໍ່ຂຶ້ນ (ຕ້ອງເຂົ້າສູ່ລະບົບ Google) ໃຫ້ກົດ “ເປີດເຕັມຈໍ”</small></div></div>
+  <div class="launch" id="launch"><div><img src="img/logo.svg" alt=""><b style="color:#132230;font-size:17px">ລະບົບບໍລິຫານ ໜ່ວຍບໍລິການ ເມືອງຄອບ</b><br><a class="go" id="go" href="#">ເປີດແອັບ</a><br><small>ຕິດຕັ້ງໃສ່ໜ້າຈໍ: ກົດ Share ⬆ → Add to Home Screen</small></div></div>
   <iframe id="app" title="ລະບົບບໍລິຫານ ໜ່ວຍບໍລິການ ເມືອງຄອບ" allow="clipboard-write; fullscreen"></iframe>
 </div>
 <script>
 // URL ຂອງ Apps Script web app (deployment ເດີມ — ບໍ່ປ່ຽນເມື່ອອັບເດດໂຄດ)
 var EXEC_URL = 'https://script.google.com/macros/s/AKfycbw_OjXqEk_KDXJ37UaHBzMnxcS_P3wDuZ9_hyNFyKVgrLmbazIiDvk_RUiUd9bAMlSY/exec';
-var q = location.search || '';
-document.getElementById('open').href = EXEC_URL + q;
-var f = document.getElementById('app');
-f.addEventListener('load', function () { document.getElementById('loading').style.display = 'none'; });
-f.src = EXEC_URL + q;
+var params = new URLSearchParams(location.search);
+var fromIcon = params.get('pwa') === '1';
+params.delete('pwa');
+var q = params.toString() ? '?' + params.toString() : '';
+var target = EXEC_URL + q;
+var ua = navigator.userAgent;
+var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+var standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+
+// iPhone/iPad: icon ເປີດໃນ Safari (ໃຊ້ການເຂົ້າສູ່ລະບົບ Google ຂອງ Safari)
+var m = document.createElement('link');
+m.rel = 'manifest';
+m.href = isIOS ? 'manifest-ios.webmanifest' : 'manifest.webmanifest';
+document.head.appendChild(m);
+
+document.getElementById('open').href = target;
+document.getElementById('go').href = target;
+
+if (isIOS || standalone) {
+  // Safari/iOS ບລັອກການເຂົ້າສູ່ລະບົບ Google ພາຍໃນ iframe → ເປີດແອັບໂດຍກົງ
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('app').remove();
+  if (fromIcon || standalone) {
+    location.replace(target);
+  } else {
+    document.getElementById('launch').style.display = 'grid';
+  }
+} else {
+  var f = document.getElementById('app');
+  f.addEventListener('load', function () { document.getElementById('loading').style.display = 'none'; });
+  f.src = target;
+}
 </script>
 </body>
 </html>

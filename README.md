@@ -56,3 +56,6 @@ Apps Script ເກັບ Version ໄດ້ສູງສຸດ 200 — ຖ້າ�
 ໜ້າ GitHub Pages ສະແດງແອັບຜ່ານ iframe (Code.gs ຕັ້ງ `XFrameOptionsMode.ALLOWALL` ແລ້ວ).
 Web app ຕັ້ງເປັນ "Anyone with Google account" ດັ່ງນັ້ນຜູ້ໃຊ້ຕ້ອງເຂົ້າສູ່ລະບົບ Google;
 ຖ້າ browser ບລັອກ ໃຫ້ກົດປຸ່ມ **ເປີດເຕັມຈໍ ↗** ເທິງແຖບດ້ານເທິງ.
+
+**iPhone/iPad:** Safari ບລັອກການເຂົ້າສູ່ລະບົບ Google ໃນ iframe, ດັ່ງນັ້ນໜ້ານີ້ສະແດງປຸ່ມ **ເປີດແອັບ** ແທນ.
+ໄອຄອນໃນໜ້າຈໍຫຼັກ (`manifest-ios.webmanifest`, `?pwa=1`) ເປີດໃນ Safari ແລ້ວໄປທີ່ແອັບໂດຍກົງ.
