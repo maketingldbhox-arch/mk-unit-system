@@ -203,7 +203,7 @@ function ghApi_(method, path, body) {
   var res = UrlFetchApp.fetch('https://script.googleapis.com/v1/projects/' + ScriptApp.getScriptId() + path, opt);
   var text = res.getContentText();
   if (res.getResponseCode() >= 300) {
-    if (/Apps Script API/i.test(text) && /enable/i.test(text)) {
+    if (/usersettings/i.test(text)) {
       throw new Error('ຍັງບໍ່ໄດ້ເປີດ Apps Script API: ເປີດທີ່ https://script.google.com/home/usersettings ແລ້ວລອງໃໝ່');
     }
     if (path === '/versions' && /limit|maximum/i.test(text)) {
