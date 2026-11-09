@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="ລະບົບບໍລິຫານ ໜ່ວຍບໍລິການ ເມືອງຄອບ">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2f86c9"/><stop offset="1" stop-color="#1a5a8f"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <!-- bank roof -->
+  <path d="M256 84 L404 160 H108 Z" fill="#fff" stroke="#fff" stroke-width="16" stroke-linejoin="round"/>
+  <circle cx="256" cy="134" r="15" fill="#f2b33d"/>
+  <rect x="116" y="176" width="280" height="22" rx="6" fill="#fff"/>
+  <!-- columns = rising bars -->
+  <rect x="142" y="300" width="58" height="96" rx="8" fill="#d6e6f5"/>
+  <rect x="227" y="260" width="58" height="136" rx="8" fill="#eaf2fa"/>
+  <rect x="312" y="218" width="58" height="178" rx="8" fill="#fff"/>
+  <!-- base -->
+  <rect x="104" y="404" width="304" height="26" rx="8" fill="#fff"/>
+  <!-- growth line -->
+  <path d="M146 352 L240 300 L292 318 L380 240" fill="none" stroke="#1a5a8f" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M146 352 L240 300 L292 318 L380 240" fill="none" stroke="#f2b33d" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M348 236 L392 228 L384 272 Z" fill="#f2b33d" stroke="#f2b33d" stroke-width="8" stroke-linejoin="round"/>
+</svg>
