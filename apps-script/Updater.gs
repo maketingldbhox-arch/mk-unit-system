@@ -24,6 +24,7 @@ var GH_BRANCH = 'main';
 var GH_DIR = 'apps-script/';
 var GH_DEPLOYMENT_ID = 'AKfycbw_OjXqEk_KDXJ37UaHBzMnxcS_P3wDuZ9_hyNFyKVgrLmbazIiDvk_RUiUd9bAMlSY';
 var GH_CHECK_MINUTES = 5;
+var GH_UPDATER_VERSION = '1.0';
 
 var GH_REQUIRED_SCOPES = [
   'https://www.googleapis.com/auth/spreadsheets',
